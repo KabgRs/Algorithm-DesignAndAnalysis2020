@@ -4,29 +4,29 @@
 #define N 10
 void merge(int a[], int left, int mid, int right) {
 	int p1 = left, p2 = mid + 1,i=0;
-	//¸¨ÖúÊı×é 
+	//è¾…åŠ©æ•°ç»„ 
 	int* temp = (int*)malloc(sizeof(int) * (right - left + 1));
-	//ÒÀ´ÎÑ¡Ôñ×ó²¿·ÖÓÒ²¿·ÖÖĞ½ÏĞ¡µÄÊı£¬¸³Öµ¸ø¸¨ÖúÊı×é
-	//×¢Òâ£º×ó²¿·ÖÓĞĞò£¬ÓÒ²¿·ÖÓĞĞò£¬µ«ÕûÌå²»Ò»¶¨ÓĞĞò 
-	//Ê¹µÃtempÖĞµÄÊı¾İÊÇÓĞĞòµÄ 
+	//ä¾æ¬¡é€‰æ‹©å·¦éƒ¨åˆ†å³éƒ¨åˆ†ä¸­è¾ƒå°çš„æ•°ï¼Œèµ‹å€¼ç»™è¾…åŠ©æ•°ç»„
+	//æ³¨æ„ï¼šå·¦éƒ¨åˆ†æœ‰åºï¼Œå³éƒ¨åˆ†æœ‰åºï¼Œä½†æ•´ä½“ä¸ä¸€å®šæœ‰åº 
+	//ä½¿å¾—tempä¸­çš„æ•°æ®æ˜¯æœ‰åºçš„ 
 	while (p1 <= mid && p2 <= right) {
-		if (a[p1] < a[p2])  temp[i++] = a[p1++];	
+		if (a[p1] <= a[p2])  temp[i++] = a[p1++];	
 		else temp[i++] = a[p2++];
 	}
-	//Á½¸öwhileÖ»»áÔËĞĞÒ»¸ö£¬½«Ê£ÓàÎ´¸³ÖµµÄÊıÒÀ´Î¸³Öµ£¨¼´ÎªÓĞĞò£© 
+	//ä¸¤ä¸ªwhileåªä¼šè¿è¡Œä¸€ä¸ªï¼Œå°†å‰©ä½™æœªèµ‹å€¼çš„æ•°ä¾æ¬¡èµ‹å€¼ï¼ˆå³ä¸ºæœ‰åºï¼‰ 
 	while (p1 <= mid) 
 		temp[i++] = a[p1++];
 
 	while (p2 <= right) 
 		temp[i++] = a[p2++];
-	//½«ÅÅĞòºÃµÄÊıÖØĞÂ¸³¸øÔ­Êı×é 
+	//å°†æ’åºå¥½çš„æ•°é‡æ–°èµ‹ç»™åŸæ•°ç»„ 
 	for (i = 0; i < right - left+1; i++) 
 		a[left + i] = temp[i];
-	//ÊÍ·ÅÄÚ´æ¿Õ¼ä 
+	//é‡Šæ”¾å†…å­˜ç©ºé—´ 
 	free(temp);
 }
 
-//½«Êı×é²»¶Ï¶ş·Ö³É¸üĞ¡µÄ²¿·Ö 
+//å°†æ•°ç»„ä¸æ–­äºŒåˆ†æˆæ›´å°çš„éƒ¨åˆ† 
 void dichotomy(int a[], int left,int right) { 
 	if (left >= right) return;
 	int mid=(left+right)/2;
@@ -35,17 +35,17 @@ void dichotomy(int a[], int left,int right) {
 	merge(a, left, mid, right);
 }
 
-void mergeSort(int a[], int n) {//¹é²¢ÅÅĞò 
+void mergeSort(int a[], int n) {//å½’å¹¶æ’åº 
 	dichotomy(a, 0, n - 1);
 }
 
-void printArr(int a[], int n) {//´òÓ¡Êı×é 
+void printArr(int a[], int n) {//æ‰“å°æ•°ç»„ 
 	for (int i = 0; i < n; i++) 
 		printf("%d ", a[i]);
 	printf("\n");
 }
 
-int* copyArr(int a[], int n) {//¸´ÖÆÊı×é 
+int* copyArr(int a[], int n) {//å¤åˆ¶æ•°ç»„ 
 	int* temp = (int*)malloc(sizeof(int) * n);
 	for (int i = 0; i < n; i++)
 		temp[i] = a[i];
@@ -56,11 +56,11 @@ int main() {
 	int arr[10] = {4,1,67,43,55,2,8,96,12,33};
 	int* temp = (int*)malloc(sizeof(int) * N);
 	temp = copyArr(arr, N);
-	printf("Ô­Êı×é£º\n");
-	printArr(temp, N);//´òÓ¡Ô­Êı×é
+	printf("åŸæ•°ç»„ï¼š\n");
+	printArr(temp, N);//æ‰“å°åŸæ•°ç»„
 	mergeSort(temp, N);
-	printf("ÅÅĞòºóÊı×é£º\n"); 
-	printArr(temp, N);//´òÓ¡ÅÅĞòÊı×é
+	printf("æ’åºåæ•°ç»„ï¼š\n"); 
+	printArr(temp, N);//æ‰“å°æ’åºæ•°ç»„
 	free(temp); 
 	return 0;
 }
